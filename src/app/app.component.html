@@ -1,3 +1,32 @@
-<ion-app>
-  <ion-router-outlet></ion-router-outlet>
-</ion-app>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Autentificacion</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-button expand="full" (click)="authFacebook()">
+
+    <ion-icon slot="start" name="logo-facebook"></ion-icon>
+
+    Facebook
+  </ion-button>
+
+
+
+  <ion-card *ngIf="userData.isLogged">
+    <ion-card-header>
+      {{ userData.username }}
+    </ion-card-header>
+    <ion-img [src]="userData.picture"></ion-img>
+    <ion-card-content>
+      <p>
+        Email: {{ userData.email }}
+      </p>
+    </ion-card-content>
+    <ion-button (click)="exitFacebook()">
+      Logout Facebook
+    </ion-button>
+  </ion-card>
+</ion-content>
