@@ -14,6 +14,12 @@
   </ion-button>
 
 
+  <ion-button expand="full" (click)="authGoogle()">
+
+    <ion-icon slot="start" name="logo-google"></ion-icon>
+
+    Google
+  </ion-button>
 
   <ion-card *ngIf="userData.isLogged">
     <ion-card-header>
@@ -29,4 +35,22 @@
       Logout Facebook
     </ion-button>
   </ion-card>
+
+
+  <ion-card *ngIf="userGoogle.isLogged">
+    <ion-card-header>
+      {{ userGoogle.displayName }}
+    </ion-card-header>
+
+    <ion-img [src]="userGoogle.imageUrl"></ion-img>
+    <ion-card-content>
+      <p>
+        Email: {{ userGoogle.email }}
+      </p>
+    </ion-card-content>
+    <ion-button (click)="exitGoogle()">
+      Logout Google
+    </ion-button>
+  </ion-card>
+
 </ion-content>
