@@ -1,5 +1,6 @@
 {
   "name": "auth",
   "integrations": {},
-  "type": "angular"
+  "type": "angular",
+  "id": "9724c048"
 }
