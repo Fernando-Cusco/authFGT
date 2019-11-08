@@ -3,27 +3,30 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Router } from '@angular/router';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
+
 export class AppComponent {
-  constructor(
-    private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
-    private router: Router
-  ) {
+
+  userData = {
+    email: null,
+    picture: null,
+    username: null,
+    isLogged: false
+  };
+
+  constructor( private platform: Platform,
+               private splashScreen: SplashScreen,
+               private statusBar: StatusBar,
+               private facebook: Facebook) {
     this.initializeApp();
   }
 
-  auth(event) {
-    console.log(event);
-    this.router.navigate(['auth']);
-  }
 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -31,6 +34,40 @@ export class AppComponent {
       this.splashScreen.hide();
     });
   }
+
+  authFacebook() {
+    this.facebook.login(['email', 'public_profile']).then((response: FacebookLoginResponse) => {
+      this.facebook.api('me?fields=id,name,email,picture.width(720).as(picture_large)', []).then(profile => {
+        this.userData = {
+          email: profile['email'],
+          picture: profile['picture_large']['data']['url'],
+          username: profile['name'],
+          isLogged: true
+        };
+      });
+    });
+  }
+
+  exitFacebook() {
+    this.facebook.logout().then(response => {
+      console.log('Estado: ', response);
+      this.userData.isLogged = false;
+    }).catch(error => {
+      console.log('Error: ', error);
+
+    });
+  }
+
+
+
+
+
+
+
+
+
+
+
 }
 
 
