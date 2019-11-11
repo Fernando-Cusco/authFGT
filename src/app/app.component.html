@@ -21,6 +21,13 @@
     Google
   </ion-button>
 
+  <ion-button expand="full" (click)="authTwitter()">
+
+      <ion-icon slot="start" name="logo-twitter"></ion-icon>
+  
+      Twitter
+    </ion-button>
+
   <ion-card *ngIf="userData.isLogged">
     <ion-card-header>
       {{ userData.username }}
@@ -50,6 +57,21 @@
     </ion-card-content>
     <ion-button (click)="exitGoogle()">
       Logout Google
+    </ion-button>
+  </ion-card>
+
+  <ion-card *ngIf="userTwitter.isLogged">
+    <ion-card-header>
+      {{ userTwitter.name }}
+    </ion-card-header>
+    <ion-img [src]="userTwitter.picture"></ion-img>
+    <ion-card-content>
+      <p>
+        Email: {{ userTwitter.email }}
+      </p>
+    </ion-card-content>
+    <ion-button (click)="exitTwitter()">
+      Logout Twitter
     </ion-button>
   </ion-card>
 

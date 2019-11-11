@@ -12,6 +12,9 @@ import { Facebook } from '@ionic-native/facebook/ngx';
 
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 
 
@@ -19,7 +22,8 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
+  AngularFireModule.initializeApp(environment.firebase), AngularFireAuthModule],
   providers: [
     StatusBar,
     SplashScreen,
